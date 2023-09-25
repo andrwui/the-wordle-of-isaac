@@ -4,6 +4,8 @@ import { useItemsStore, useItemStore, useSelectedItemStore, useHasGuessedStore }
 
 import { type Item } from '../../types/Item'
 
+import './SearchBox.sass'
+
 const SearchBox = () => {
   const [filteredItems, setFilteredItems] = useState([] as Item[])
   const { setHasGuessed, hasGuessed } = useHasGuessedStore()
@@ -46,6 +48,7 @@ const SearchBox = () => {
       <ul className="searchResults">
         {filteredItems.map(item => (
           <li key={item.id} onClick={() => selectItem(item)}>
+            <img src={item.image} alt="" />
             {item.name}
           </li>
         ))}

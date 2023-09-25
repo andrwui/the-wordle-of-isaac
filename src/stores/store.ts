@@ -6,6 +6,7 @@ interface ItemStore {
   item: Item | null
   setItem: (items: Item[]) => void
 }
+
 export const useItemsStore = create<ItemsStore>(set => ({
   items: [],
   setItems: (items: Item[]) => {

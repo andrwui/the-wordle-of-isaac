@@ -31,13 +31,21 @@ const App = () => {
           setItem(data)
           setSelectedItem(null)
           setHasRestarted(false)
-          setHasGuessed(false)
+          setHasRestarted(false)
         }
       })
       .catch(err => {
         console.error(err)
       })
   }, [hasRestarted])
+
+  useEffect(() => {
+    if (item?.id === selectedItem?.id) {
+      setHasGuessed(true)
+    } else {
+      setHasGuessed(false)
+    }
+  }, [item, selectedItem, setHasGuessed])
 
   return (
     <>
