@@ -30,6 +30,7 @@ const SearchBox = () => {
     setFilteredItems([])
     setInputValue('')
     if (item!.id === selectedItem!.id) {
+      // maybe not relying on setHasGuessed for validation, consider using a variable
       setHasGuessed(true)
     } else {
       setHasGuessed(false)
