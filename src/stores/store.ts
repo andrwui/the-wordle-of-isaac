@@ -26,11 +26,22 @@ export const useItemStore = create<ItemStore>(set => ({
 
 interface SelectedItemStore {
   selectedItem: Item | null
-  setSelectedItem: (item: Item) => void
+  setSelectedItem: (item: Item | null) => void
 }
 export const useSelectedItemStore = create<SelectedItemStore>(set => ({
   selectedItem: null,
-  setSelectedItem: (item: Item) => {
+  setSelectedItem: (item: Item | null) => {
     set({ selectedItem: item })
+  },
+}))
+
+interface HasGuessedStore {
+  hasGuessed: boolean | undefined
+  setHasGuessed: (hasGuessed: boolean) => void
+}
+export const useHasGuessedStore = create<HasGuessedStore>(set => ({
+  hasGuessed: undefined,
+  setHasGuessed: (hasGuessed: boolean) => {
+    set({ hasGuessed })
   },
 }))

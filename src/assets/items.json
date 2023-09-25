@@ -694,7 +694,7 @@
   },
   {
     "id": 50,
-    "name": "Steven (Item)",
+    "name": "Steven",
     "quality": "3",
     "image": "https://static.wikia.nocookie.net/bindingofisaacre_gamepedia/images/0/04/Dlc_nr_indicator.png/revision/latest?cb=20210815090236",
     "DLC": "Rebirth",
@@ -4457,7 +4457,7 @@
   },
   {
     "id": 318,
-    "name": "Gemini (Item)",
+    "name": "Gemini",
     "quality": "1",
     "image": "https://static.wikia.nocookie.net/bindingofisaacre_gamepedia/images/c/cc/Dlc_na%E2%80%A0_indicator.png/revision/latest?cb=20171216155445",
     "DLC": "Rebirth",
@@ -7025,7 +7025,7 @@
   },
   {
     "id": 503,
-    "name": "Little Horn (Item)",
+    "name": "Little Horn",
     "quality": "3",
     "image": "https://static.wikia.nocookie.net/bindingofisaacre_gamepedia/images/9/97/Collectible_Little_Horn_icon.png/revision/latest?cb=20210822020536",
     "DLC": "Afterbirth †",
@@ -8601,7 +8601,7 @@
   },
   {
     "id": 624,
-    "name": "Booster Pack (Item)",
+    "name": "Booster Pack",
     "quality": "1",
     "image": "https://static.wikia.nocookie.net/bindingofisaacre_gamepedia/images/e/e0/Collectible_Booster_Pack_icon.png/revision/latest?cb=20210822145837",
     "DLC": "Repentance",
@@ -8711,7 +8711,7 @@
   },
   {
     "id": 633,
-    "name": "Dogma (Item)",
+    "name": "Dogma",
     "quality": "3",
     "image": "https://static.wikia.nocookie.net/bindingofisaacre_gamepedia/images/1/1b/Collectible_Dogma_icon.png/revision/latest?cb=20210824094519",
     "DLC": "Repentance",
