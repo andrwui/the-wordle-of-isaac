@@ -1,8 +1,15 @@
 import { useEffect, useState } from 'react'
-import { useHasGuessedStore, useItemStore, useItemsStore, useSelectedItemStore } from './stores/store.ts'
+import {
+  useHasGuessedStore,
+  useItemStore,
+  useItemsStore,
+  useSelectedItemStore,
+  useGuessedItemsStore,
+} from './stores/store.ts'
 
 import SearchBox from './components/searchBox/SearchBox'
 import Header from './components/header/Header'
+import GuessedItem from './components/guessedItems/GuessedItem'
 import './App.sass'
 
 const App = () => {
@@ -11,10 +18,12 @@ const App = () => {
   const { item, setItem } = useItemStore()
   const { setItems } = useItemsStore()
   const { setSelectedItem, selectedItem } = useSelectedItemStore()
+  const { guessedItems, resetGuessedItems } = useGuessedItemsStore()
 
   console.log(item)
   console.log(selectedItem)
   console.log(hasGuessed)
+  console.log(guessedItems)
 
   const restart = () => {
     setHasRestarted(true)
@@ -29,6 +38,7 @@ const App = () => {
           const data = await res.json()
           setItems(data)
           setItem(data)
+          resetGuessedItems()
           setSelectedItem(null)
           setHasRestarted(false)
           setHasRestarted(false)
@@ -50,8 +60,13 @@ const App = () => {
   return (
     <>
       <Header />
-      <button onClick={() => restart()}>Restart</button>
+      <button style={{ margin: '0 auto' }} onClick={() => restart()}>
+        Restart
+      </button>
       <SearchBox />
+      {guessedItems.map(item => (
+        <GuessedItem key={item.id} item={item} />
+      ))}
     </>
   )
 }

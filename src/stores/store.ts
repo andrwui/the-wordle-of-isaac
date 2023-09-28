@@ -46,3 +46,18 @@ export const useHasGuessedStore = create<HasGuessedStore>(set => ({
     set({ hasGuessed })
   },
 }))
+
+interface GuessedItemsStore {
+  guessedItems: Item[]
+  setGuessedItems: (guessedItem: Item) => void
+  resetGuessedItems: () => void
+}
+export const useGuessedItemsStore = create<GuessedItemsStore>(set => ({
+  guessedItems: [] as Item[],
+  setGuessedItems: (guessedItem: Item) => {
+    set(state => ({ guessedItems: guessedItem ? [...state.guessedItems, guessedItem] : [...state.guessedItems] }))
+  },
+  resetGuessedItems: () => {
+    set({ guessedItems: [] })
+  },
+}))
