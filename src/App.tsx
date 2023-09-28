@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   useHasGuessedStore,
   useItemStore,
@@ -14,6 +14,7 @@ import './App.sass'
 
 const App = () => {
   const [hasRestarted, setHasRestarted] = useState(false)
+  const [trys, setTrys] = useState(0)
   const { hasGuessed, setHasGuessed } = useHasGuessedStore()
   const { item, setItem } = useItemStore()
   const { setItems } = useItemsStore()
@@ -40,7 +41,7 @@ const App = () => {
           setItem(data)
           resetGuessedItems()
           setSelectedItem(null)
-          setHasRestarted(false)
+          setTrys(0)
           setHasRestarted(false)
         }
       })
@@ -55,17 +56,16 @@ const App = () => {
     } else {
       setHasGuessed(false)
     }
-  }, [item, selectedItem, setHasGuessed])
+  }, [selectedItem, setHasGuessed])
 
   return (
     <>
       <Header />
-      <button style={{ margin: '0 auto' }} onClick={() => restart()}>
-        Restart
-      </button>
+      <p>{trys > 3 && item!.description}</p>
+      <button onClick={() => restart()}>Restart</button>
       <SearchBox />
       {guessedItems.map(item => (
-        <GuessedItem key={item.id} item={item} />
+        <GuessedItem key={item.id} itemProp={item} />
       ))}
     </>
   )
