@@ -60,11 +60,11 @@ const App = () => {
     <>
       <Header />
       <p>{tries > 3 && item!.description}</p>
-      <button onClick={() => restart()}>Restart</button>
+      <button onClick={() => restart()} id="RESTART">
+        Restart
+      </button>
       <SearchBox />
-      {guessedItems.map(item => (
-        <GuessedItem key={item.id} itemProp={item} />
-      ))}
+      {guessedItems && guessedItems.map(item => <GuessedItem key={item.id} itemProp={item} />)}
     </>
   )
 }

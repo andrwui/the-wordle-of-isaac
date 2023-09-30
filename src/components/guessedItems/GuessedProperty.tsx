@@ -17,7 +17,6 @@ const GuessedProperty = <K extends keyof Item>({
 }): JSX.Element => {
   if (pool && property === 'pools') {
     if (item.pools.includes(pool)) {
-      console.log('GUESSEDPROPERTY, POOL: ', pool)
       return (
         <>
           <img src={greenCheck} alt="Guessed!" className="guessedIcon" />
