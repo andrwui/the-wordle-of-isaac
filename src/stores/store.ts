@@ -61,3 +61,18 @@ export const useGuessedItemsStore = create<GuessedItemsStore>(set => ({
     set({ guessedItems: [] })
   },
 }))
+
+interface triesStore {
+  tries: number
+  addTry: () => void
+  resetTries: () => void
+}
+export const useTriesStore = create<triesStore>(set => ({
+  tries: 0,
+  addTry: () => {
+    set(state => ({ tries: state.tries + 1 }))
+  },
+  resetTries: () => {
+    set({ tries: 0 })
+  },
+}))

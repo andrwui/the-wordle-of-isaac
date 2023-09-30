@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import {
   useItemsStore,
-  useItemStore,
+  useTriesStore,
   useSelectedItemStore,
   useHasGuessedStore,
   useGuessedItemsStore,
@@ -15,6 +15,7 @@ import './SearchBox.sass'
 const SearchBox = () => {
   const [filteredItems, setFilteredItems] = useState([] as Item[])
   const [inputValue, setInputValue] = useState('')
+  const { addTry } = useTriesStore()
   const { hasGuessed } = useHasGuessedStore()
   const { items } = useItemsStore()
   const { setSelectedItem } = useSelectedItemStore()
@@ -38,6 +39,7 @@ const SearchBox = () => {
     setGuessedItems(item)
     setFilteredItems([])
     setInputValue('')
+    addTry()
   }
 
   return (

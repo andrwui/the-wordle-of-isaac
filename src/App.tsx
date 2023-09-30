@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   useHasGuessedStore,
   useItemStore,
   useItemsStore,
   useSelectedItemStore,
   useGuessedItemsStore,
+  useTriesStore,
 } from './stores/store.ts'
 
 import SearchBox from './components/searchBox/SearchBox'
@@ -14,17 +15,14 @@ import './App.sass'
 
 const App = () => {
   const [hasRestarted, setHasRestarted] = useState(false)
-  const [trys, setTrys] = useState(0)
+  const { resetTries, tries } = useTriesStore()
   const { hasGuessed, setHasGuessed } = useHasGuessedStore()
   const { item, setItem } = useItemStore()
   const { setItems } = useItemsStore()
   const { setSelectedItem, selectedItem } = useSelectedItemStore()
   const { guessedItems, resetGuessedItems } = useGuessedItemsStore()
 
-  console.log(item)
-  console.log(selectedItem)
-  console.log(hasGuessed)
-  console.log(guessedItems)
+  console.log('SELECTED ITEM: ', item)
 
   const restart = () => {
     setHasRestarted(true)
@@ -37,11 +35,11 @@ const App = () => {
           throw new Error('Items database not found!')
         } else {
           const data = await res.json()
+          resetTries()
           setItems(data)
           setItem(data)
           resetGuessedItems()
           setSelectedItem(null)
-          setTrys(0)
           setHasRestarted(false)
         }
       })
@@ -61,7 +59,7 @@ const App = () => {
   return (
     <>
       <Header />
-      <p>{trys > 3 && item!.description}</p>
+      <p>{tries > 3 && item!.description}</p>
       <button onClick={() => restart()}>Restart</button>
       <SearchBox />
       {guessedItems.map(item => (
