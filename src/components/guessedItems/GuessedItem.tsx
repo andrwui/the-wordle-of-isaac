@@ -35,7 +35,7 @@ const GuessedItem = ({ itemProp }: GuessedItemProp) => {
                 <span>
                   <GuessedProperty item={item!} guessedItem={itemProp} property="pools" pool={pool} />
                 </span>
-              </li> // ADD THE GUESSEDPROPERTY COMP LOGIC FOR THIS
+              </li>
             ))}
           </ul>
         </li>
