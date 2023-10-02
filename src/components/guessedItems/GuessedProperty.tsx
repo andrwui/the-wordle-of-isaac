@@ -54,6 +54,33 @@ const GuessedProperty = <K extends keyof Item>({
     }
   }
 
+  if (property === 'DLC') {
+    const DLCs = ['Rebirth', 'Afterbirth', 'Afterbirth †', 'Repentance']
+
+    const indexGuessedItem: number = DLCs.indexOf(guessedItem[property] as string)
+    const indexCurrentItem: number = DLCs.indexOf(item[property] as string)
+
+    if (indexGuessedItem < indexCurrentItem) {
+      return (
+        <>
+          <img src={upArrow} alt="Not guessed" className="guessedIcon" />
+        </>
+      )
+    } else if (indexGuessedItem > indexCurrentItem) {
+      return (
+        <>
+          <img src={downArrow} alt="Not guessed" className="guessedIcon" />
+        </>
+      )
+    } else {
+      return (
+        <>
+          <img src={greenCheck} alt="Guessed" className="guessedIcon" />
+        </>
+      )
+    }
+  }
+
   if (item[property] === guessedItem[property]) {
     return (
       <>

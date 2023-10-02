@@ -33,6 +33,7 @@ module.exports = {
     '@typescript-eslint/await-thenable': 'off',
     'react/react-in-jsx-scope': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
+    '@typescript-eslint/prefer-optional-chain': 'off',
     'prettier/prettier': [
       'error',
       {

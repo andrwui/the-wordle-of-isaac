@@ -16,7 +16,7 @@ import './App.sass'
 const App = () => {
   const [hasRestarted, setHasRestarted] = useState(false)
   const { resetTries, tries } = useTriesStore()
-  const { hasGuessed, setHasGuessed } = useHasGuessedStore()
+  const { setHasGuessed } = useHasGuessedStore()
   const { item, setItem } = useItemStore()
   const { setItems } = useItemsStore()
   const { setSelectedItem, selectedItem } = useSelectedItemStore()
@@ -64,6 +64,7 @@ const App = () => {
         Restart
       </button>
       <SearchBox />
+
       <div className="guessedItems">
         {guessedItems && guessedItems.map(item => <GuessedItem key={item.id} itemProp={item} />)}
       </div>
