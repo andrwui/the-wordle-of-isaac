@@ -64,7 +64,9 @@ const App = () => {
         Restart
       </button>
       <SearchBox />
-      {guessedItems && guessedItems.map(item => <GuessedItem key={item.id} itemProp={item} />)}
+      <div className="guessedItems">
+        {guessedItems && guessedItems.map(item => <GuessedItem key={item.id} itemProp={item} />)}
+      </div>
     </>
   )
 }

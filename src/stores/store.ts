@@ -6,11 +6,10 @@ interface ItemStore {
   item: Item | null
   setItem: (items: Item[]) => void
 }
-
-export const useItemsStore = create<ItemsStore>(set => ({
-  items: [],
-  setItems: (items: Item[]) => {
-    set({ items })
+export const useItemStore = create<ItemStore>(set => ({
+  item: null,
+  setItem: (items: Item[]) => {
+    set({ item: getRandomItem(items) })
   },
 }))
 
@@ -18,10 +17,10 @@ interface ItemsStore {
   items: Item[] | null
   setItems: (items: Item[]) => void
 }
-export const useItemStore = create<ItemStore>(set => ({
-  item: null,
-  setItem: (items: Item[]) => {
-    set({ item: getRandomItem(items) })
+export const useItemsStore = create<ItemsStore>(set => ({
+  items: [],
+  setItems: (items: Item[]) => {
+    set({ items })
   },
 }))
 
