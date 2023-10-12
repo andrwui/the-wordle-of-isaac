@@ -1,23 +1,24 @@
 @font-face 
-  font-family: Upheaval
-  src: url('./assets/fonts/upheavtt.ttf')
+  font-family: IsaacGame
+  src: url('./assets/fonts/IsaacGame.ttf')
 
 *
-  font-family: Upheaval
+  font-family: IsaacGame
   margin: 0
 
 body
   margin: 0
   padding: 0
   height: 100dvh
-  background-color: #603829
+  background: rgb(255,255,255)
+  background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(194,194,194,1) 100%)
 
 
 li
   list-style: none  
 
 
-* img, img
+* img
   image-rendering: pixelated
 
 #root
@@ -29,9 +30,3 @@ li
   flex-direction: column
   justify-content: center
   align-items: center
-
-
-.guessedItems
-    display: flex
-    flex-direction: column-reverse
-    gap: .5em

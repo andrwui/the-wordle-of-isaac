@@ -8,9 +8,9 @@ import {
   useTriesStore,
 } from './stores/store.ts'
 
-import SearchBox from './components/searchBox/SearchBox'
-import Header from './components/header/Header'
-import GuessedItem from './components/guessedItems/GuessedItem'
+import SearchBox from './components__redone/searchBox/SearchBox'
+import Header from './components__redone/header/Header'
+import GuessedItem from './components__redone/guessedItems/GuessedItem'
 import './App.sass'
 
 const App = () => {
@@ -65,9 +65,7 @@ const App = () => {
       </button>
       <SearchBox />
 
-      <div className="guessedItems">
-        {guessedItems && guessedItems.map(item => <GuessedItem key={item.id} itemProp={item} />)}
-      </div>
+      <div className="">{guessedItems && guessedItems.map(item => <GuessedItem key={item.id} itemProp={item} />)}</div>
     </>
   )
 }
