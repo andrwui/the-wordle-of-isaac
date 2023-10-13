@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react'
-import type { Theme } from 'theme-ui'
+
+import { lightTheme } from '../src/styles/light.ts'
+import { ThemeUIProvider } from 'theme-ui'
+
 import {
   useHasGuessedStore,
   useItemStore,
@@ -57,14 +60,17 @@ const App = () => {
 
   return (
     <>
-      <Header />
-      <p>{tries > 3 && item!.description}</p>
-      <button onClick={() => restart()} id="RESTART">
-        Restart
-      </button>
-      <SearchBox />
+      <ThemeUIProvider theme={lightTheme}>
+        <Header />
+        {/* <button onClick={() => restart()} id="RESTART">
+          Restart
+        </button>
+        <SearchBox />
 
-      <div className="">{guessedItems && guessedItems.map(item => <GuessedItem key={item.id} itemProp={item} />)}</div>
+        <div className="">
+          {guessedItems && guessedItems.map(item => <GuessedItem key={item.id} itemProp={item} />)}
+        </div> */}
+      </ThemeUIProvider>
     </>
   )
 }
