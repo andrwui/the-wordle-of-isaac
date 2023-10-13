@@ -10,8 +10,6 @@ import {
 
 import { type Item } from '../../types/Item'
 
-import './SearchBox.sass'
-
 const SearchBox = () => {
   const [filteredItems, setFilteredItems] = useState([] as Item[])
   const [inputValue, setInputValue] = useState('')

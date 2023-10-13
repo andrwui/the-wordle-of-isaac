@@ -1,5 +1,3 @@
-import './GuessedItem.sass'
-
 import React, { useEffect, useRef, useState } from 'react'
 import { useItemStore } from '../../stores/store'
 import { type Item } from '../../types/Item'

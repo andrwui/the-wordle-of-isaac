@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import type { Theme } from 'theme-ui'
 import {
   useHasGuessedStore,
   useItemStore,
@@ -11,7 +12,6 @@ import {
 import SearchBox from './components__redone/searchBox/SearchBox'
 import Header from './components__redone/header/Header'
 import GuessedItem from './components__redone/guessedItems/GuessedItem'
-import './App.sass'
 
 const App = () => {
   const [hasRestarted, setHasRestarted] = useState(false)
@@ -21,8 +21,6 @@ const App = () => {
   const { setItems } = useItemsStore()
   const { setSelectedItem, selectedItem } = useSelectedItemStore()
   const { guessedItems, resetGuessedItems } = useGuessedItemsStore()
-
-  console.log('SELECTED ITEM: ', item)
 
   const restart = () => {
     setHasRestarted(true)
@@ -41,6 +39,7 @@ const App = () => {
           resetGuessedItems()
           setSelectedItem(null)
           setHasRestarted(false)
+          console.log('SELECTED ITEM: ', item!.name)
         }
       })
       .catch(err => {

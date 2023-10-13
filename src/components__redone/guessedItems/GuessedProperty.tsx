@@ -1,4 +1,3 @@
-import './GuessedItem.sass'
 import { type Item } from '../../types/Item'
 import greenCheck from '../../assets/icons/green_check.png'
 import redCross from '../../assets/icons/red_cross.png'

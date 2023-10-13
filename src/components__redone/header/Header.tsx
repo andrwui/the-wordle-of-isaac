@@ -1,5 +1,4 @@
 import logo from '../../assets/splash/Logo.png'
-import './Header.sass'
 
 const Header = () => {
   return (
