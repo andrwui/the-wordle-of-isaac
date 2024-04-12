@@ -3,7 +3,7 @@ type Item = {
   name: string
   quality: string
   image: string
-  dlc: string
+  dlc: 'Rebirth' | 'Afterbirth' | 'Afterbirth +' | 'Repentance'
   type: string
   quote: string
   pools: string[]

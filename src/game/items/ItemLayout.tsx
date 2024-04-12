@@ -6,7 +6,6 @@ import { randomNumber } from '../../helpers/helpers'
 import { CurrentItemPreview } from './tests'
 import useGuessesStore from './stores/GuessStore'
 import ResetButton from './components/ResetButton/ResetButton'
-import HintContainer from './components/Hints/HintContainer'
 
 const ItemLayout = (): ReactElement => {
   const { items, setItems, currentItem, setCurrentItem } = useItemsStore()
@@ -27,7 +26,6 @@ const ItemLayout = (): ReactElement => {
 
     return () => {
       setItems([])
-      setCurrentItem(null)
     }
   }, [hasGuessed])
 
@@ -36,7 +34,7 @@ const ItemLayout = (): ReactElement => {
       {window.dev && currentItem && (
         <CurrentItemPreview currentItem={currentItem} />
       )}
-      <HintContainer>? ? ?</HintContainer>
+      {/* <HintContainer>? ? ?</HintContainer> */}
       <ResetButton />
       <SearchBar items={items} />
       <GuessContainer />
