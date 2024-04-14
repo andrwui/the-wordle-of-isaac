@@ -6,24 +6,37 @@ import {
 } from 'react'
 import './SearchBar.sass'
 import SearchBarList from './SearchBarList'
-import useGuessesStore from '../../stores/GuessStore'
-import useItemsStore from '../../stores/ItemsStore'
 
-const SearchBar = ({ items }: { items: Item[] }): ReactElement => {
-  const [filteredItems, setFilteredItems] = useState([] as Item[])
+type SearchBarProps = {
+  items: Item[] | Trinket[]
+  setItems: (items: Item[] | Trinket[]) => void
+  currentItem: Item | Trinket | null
 
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [inputValue, setInputValue] = useState('')
+  addGuess: (guess: Item | Trinket) => void
+  setHasGuessed: (hasGuessed: boolean) => void
+  hasGuessed: boolean
+}
 
-  const { items: allItems, setItems, currentItem } = useItemsStore()
-  const { addGuess, setHasGuessed, hasGuessed } = useGuessesStore()
+const SearchBar = ({
+  items,
+  setItems,
+  currentItem,
+  addGuess,
+  setHasGuessed,
+  hasGuessed,
+}: SearchBarProps): ReactElement => {
+  const [filteredItems, setFilteredItems] = useState<Item[] | Trinket[]>([])
+
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
+  const [inputValue, setInputValue] = useState<string>('')
+  const [selectedItem, setSelectedItem] = useState<number>(-1)
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const value = e.target.value.trim()
     setInputValue(e.target.value)
     setFilteredItems(
       items.filter((a) =>
-        a.name.trim().toLowerCase().startsWith(value.trim().toLowerCase()),
+        a.name.trim().toLowerCase().includes(value.trim().toLowerCase()),
       ),
     )
     !isMenuOpen && setIsMenuOpen(true)
@@ -31,7 +44,9 @@ const SearchBar = ({ items }: { items: Item[] }): ReactElement => {
   }
 
   const handleBlur = (): void => {
-    setTimeout(() => setIsMenuOpen(false), 150)
+    setSelectedItem(-1)
+    console.log(selectedItem)
+    setIsMenuOpen(false)
   }
 
   const handleFocus = (): void => {
@@ -42,16 +57,32 @@ const SearchBar = ({ items }: { items: Item[] }): ReactElement => {
     const key = e.key
     console.log('key: ', key)
     if (key === 'Enter') {
-      const lastItem: Item = filteredItems[0]
-      setItems(allItems.filter((a) => a.id !== lastItem.id))
-      addGuess(lastItem)
+      const selecItem =
+        selectedItem > -1 ? filteredItems[selectedItem] : filteredItems[0]
+      setItems(items.filter((a) => a.id !== selecItem.id))
+      addGuess(selecItem)
       setInputValue('')
       setIsMenuOpen(false)
-      lastItem.id === currentItem?.id && setHasGuessed(true)
+      setSelectedItem(-1)
+      setFilteredItems([])
+      selecItem.id === currentItem?.id && setHasGuessed(true)
     }
     if (key === 'Escape') {
       setInputValue('')
       setIsMenuOpen(false)
+    }
+
+    if (key === 'ArrowDown') {
+      const cap = filteredItems.length - 1
+      if (selectedItem < cap) {
+        setSelectedItem((s) => s + 1)
+      }
+    }
+    if (key === 'ArrowUp') {
+      const cap = 0
+      if (selectedItem > cap) {
+        setSelectedItem((s) => s - 1)
+      }
     }
   }
 
@@ -69,6 +100,14 @@ const SearchBar = ({ items }: { items: Item[] }): ReactElement => {
       />
       {isMenuOpen && (
         <SearchBarList
+          setFilteredItems={setFilteredItems}
+          addGuess={addGuess}
+          currentItem={currentItem}
+          hasGuessed={hasGuessed}
+          items={items}
+          setHasGuessed={setHasGuessed}
+          setItems={setItems}
+          selectedItem={selectedItem}
           possibleValues={filteredItems}
           setIsMenuOpen={setIsMenuOpen}
           setInputValue={setInputValue}

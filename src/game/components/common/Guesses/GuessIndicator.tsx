@@ -4,23 +4,58 @@ import check from '../../../../assets/images/check.png'
 import { type ReactElement } from 'react'
 import useItemsStore from '../../../items/stores/ItemsStore'
 
-type GuessIndicatorProps = { item: Item; property: keyof Item }
-
-const ArrowUp = (): ReactElement => (
-  <img src={arrow} style={{ rotate: '0deg' }} className="indicator" />
-)
-const ArrowDown = (): ReactElement => (
-  <img src={arrow} style={{ rotate: '180deg' }} className="indicator" />
-)
-const Check = (): ReactElement => <img src={check} className="indicator" />
-const Cross = (): ReactElement => <img src={cross} className="indicator" />
+type GuessIndicatorProps = {
+  item: Item
+  property: keyof Item
+  pool?: string
+  size?: string
+}
 
 const GuessIndicator = ({
   item,
   property,
+  pool,
+  size,
 }: GuessIndicatorProps): ReactElement => {
+  const ArrowUp = (): ReactElement => (
+    <img
+      src={arrow}
+      style={{ rotate: '0deg', width: size && size, height: size && size }}
+      className="indicator"
+    />
+  )
+  const ArrowDown = (): ReactElement => (
+    <img
+      src={arrow}
+      style={{ rotate: '180deg', width: size && size, height: size && size }}
+      className="indicator"
+    />
+  )
+  const Check = (): ReactElement => (
+    <img
+      src={check}
+      style={{
+        width: size && size,
+        height: size && size,
+      }}
+      className="indicator"
+    />
+  )
+  const Cross = (): ReactElement => (
+    <img
+      src={cross}
+      style={{
+        width: size && size,
+        height: size && size,
+      }}
+      className="indicator"
+    />
+  )
+
   const { currentItem } = useItemsStore()
   if (currentItem) {
+    console.log(currentItem[property])
+
     if (property === 'quality' || property === 'id') {
       if (currentItem[property] > item[property]) {
         return <ArrowUp />
@@ -41,15 +76,24 @@ const GuessIndicator = ({
       } else if (currentItemDLC < itemDLC) {
         return <ArrowDown />
       } else {
-        return <img src={check} />
+        return <Check />
       }
     }
 
-    if (property === 'pools' || property === 'type') {
+    if (property === 'type') {
       if (currentItem[property] === item[property]) {
         return <Check />
       } else {
         return <Cross />
+      }
+    }
+    if (property === 'pools') {
+      if (pool) {
+        if (currentItem.pools.includes(pool)) {
+          return <Check />
+        } else {
+          return <Cross />
+        }
       }
     }
   }

@@ -1,4 +1,4 @@
-import { type ReactElement, useEffect } from 'react'
+import { type ReactElement, useEffect, useState } from 'react'
 import useItemsStore from './stores/ItemsStore'
 import GuessContainer from '../components/common/Guesses/GuessContainer'
 import SearchBar from './components/SearchBar/SearchBar'
@@ -6,22 +6,22 @@ import { randomNumber } from '../../helpers/helpers'
 import { CurrentItemPreview } from './tests'
 import useGuessesStore from './stores/GuessStore'
 import ResetButton from './components/ResetButton/ResetButton'
+import itemsFile from '../../assets/json/items.json'
+
+// import HintContainer from './components/Hints/HintContainer'
 
 const ItemLayout = (): ReactElement => {
   const { items, setItems, currentItem, setCurrentItem } = useItemsStore()
-  const { hasGuessed, resetGuesses } = useGuessesStore()
+  const { addGuess, hasGuessed, resetGuesses, setHasGuessed } =
+    useGuessesStore()
+
+  const [answerVisible, setAnswerVisible] = useState<boolean>(false)
 
   useEffect(() => {
     if (!hasGuessed) {
       resetGuesses()
-      fetch('https://tboiws.onrender.com/items')
-        .then(async (data) => (await data.json()) as Item[])
-        .then((items: Item[]) => {
-          setItems(items)
-
-          const index = randomNumber(0, items.length)
-          setCurrentItem(items[index])
-        })
+      setItems(itemsFile)
+      setCurrentItem(itemsFile[randomNumber(0, itemsFile.length)])
     }
 
     return () => {
@@ -31,12 +31,32 @@ const ItemLayout = (): ReactElement => {
 
   return (
     <>
-      {window.dev && currentItem && (
+      {answerVisible && currentItem && (
         <CurrentItemPreview currentItem={currentItem} />
       )}
-      {/* <HintContainer>? ? ?</HintContainer> */}
-      <ResetButton />
-      <SearchBar items={items} />
+      {/* <HintContainer>holiwis</HintContainer> */}
+      <div
+        style={{
+          display: 'flex',
+          gap: '10px',
+        }}
+      >
+        <ResetButton />
+        <button
+          onClick={() => setAnswerVisible((s) => !s)}
+          className="reset-button"
+        >
+          Show it
+        </button>
+      </div>
+      <SearchBar
+        addGuess={(guess: Item | Trinket) => addGuess(guess as Item)}
+        currentItem={currentItem && currentItem}
+        hasGuessed={hasGuessed}
+        items={items}
+        setHasGuessed={setHasGuessed}
+        setItems={(items: Item[] | Trinket[]) => setItems(items as Item[])}
+      />
       <GuessContainer />
     </>
   )

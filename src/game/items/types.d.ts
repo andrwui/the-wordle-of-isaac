@@ -3,9 +3,17 @@ type Item = {
   name: string
   quality: string
   image: string
-  dlc: 'Rebirth' | 'Afterbirth' | 'Afterbirth +' | 'Repentance'
+  dlc: string
   type: string
   quote: string
   pools: string[]
+  description: string
+}
+type Trinket = {
+  id: number
+  name: string
+  image: string
+  dlc: string
+  quote: string
   description: string
 }
