@@ -71,12 +71,14 @@ const ItemLayout = (): ReactElement => {
         }}
       >
         <ResetButton />
-        <button
-          onClick={() => setAnswerVisible((s) => !s)}
-          className="reset-button"
-        >
-          Show it
-        </button>
+        {window.dev && (
+          <button
+            onClick={() => setAnswerVisible((s) => !s)}
+            className="reset-button"
+          >
+            Show it
+          </button>
+        )}
       </div>
       {quoteRevealed && <p>{currentItem?.quote}</p>}
       {descRevealed && (
