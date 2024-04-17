@@ -7,8 +7,11 @@ import { CurrentItemPreview } from './tests'
 import useGuessesStore from './stores/GuessStore'
 import ResetButton from './components/ResetButton/ResetButton'
 import itemsFile from '../../assets/json/items.json'
+import ImageHint from './components/Hints/ImageHint'
 
-// import HintContainer from './components/Hints/HintContainer'
+import HintContainer from './components/Hints/HintContainer'
+import Hint from './components/Hints/Hint'
+import CustomHint from './components/Hints/CustomHint'
 
 const ItemLayout = (): ReactElement => {
   const { items, setItems, currentItem, setCurrentItem } = useItemsStore()
@@ -16,9 +19,13 @@ const ItemLayout = (): ReactElement => {
     useGuessesStore()
 
   const [answerVisible, setAnswerVisible] = useState<boolean>(false)
+  const [quoteRevealed, setQuoteRevealed] = useState<boolean>(false)
+  const [descRevealed, setDescRevealed] = useState<boolean>(false)
 
   useEffect(() => {
     if (!hasGuessed) {
+      setDescRevealed(false)
+      setQuoteRevealed(false)
       resetGuesses()
       setItems(itemsFile)
       setCurrentItem(itemsFile[randomNumber(0, itemsFile.length)])
@@ -31,10 +38,32 @@ const ItemLayout = (): ReactElement => {
 
   return (
     <>
-      {answerVisible && currentItem && (
+      {window.dev && answerVisible && currentItem && (
         <CurrentItemPreview currentItem={currentItem} />
       )}
-      {/* <HintContainer>holiwis</HintContainer> */}
+      <HintContainer>
+        <Hint hintName="Quote">
+          <CustomHint
+            onClick={() => setQuoteRevealed(true)}
+            style={{
+              color: quoteRevealed ? '#595353' : '',
+              cursor: quoteRevealed ? 'not-allowed' : '',
+            }}
+          />
+        </Hint>
+        <Hint hintName="Image">
+          <ImageHint />
+        </Hint>
+        <Hint hintName="Description">
+          <CustomHint
+            onClick={() => setDescRevealed(true)}
+            style={{
+              color: descRevealed ? '#595353' : '',
+              cursor: descRevealed ? 'not-allowed' : '',
+            }}
+          />
+        </Hint>
+      </HintContainer>
       <div
         style={{
           display: 'flex',
@@ -49,6 +78,19 @@ const ItemLayout = (): ReactElement => {
           Show it
         </button>
       </div>
+      {quoteRevealed && <p>{currentItem?.quote}</p>}
+      {descRevealed && (
+        <p
+          style={{
+            fontSize: '.7em',
+            maxWidth: '50ch',
+            textAlign: 'center',
+          }}
+        >
+          {currentItem?.description}
+        </p>
+      )}
+
       <SearchBar
         addGuess={(guess: Item | Trinket) => addGuess(guess as Item)}
         currentItem={currentItem && currentItem}

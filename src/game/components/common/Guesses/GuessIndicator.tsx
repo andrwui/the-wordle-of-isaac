@@ -54,8 +54,6 @@ const GuessIndicator = ({
 
   const { currentItem } = useItemsStore()
   if (currentItem) {
-    console.log(currentItem[property])
-
     if (property === 'quality' || property === 'id') {
       if (currentItem[property] > item[property]) {
         return <ArrowUp />

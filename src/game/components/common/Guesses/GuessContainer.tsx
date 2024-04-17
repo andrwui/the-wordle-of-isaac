@@ -42,7 +42,9 @@ const GuessContainer = (): ReactElement => {
                   <div
                     key={i}
                     className="guesses__guess__card-lg__hor"
-                    style={{}}
+                    style={{
+                      fontSize: pool.length > 15 ? '.8em' : '',
+                    }}
                   >
                     <p>{pool}</p>
                     <GuessIndicator item={el} property="pools" pool={pool} />

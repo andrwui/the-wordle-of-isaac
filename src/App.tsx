@@ -9,7 +9,7 @@ import logo from './assets/images/Logo 1.png'
 const App = (): ReactElement => {
   return (
     <div className="main-section">
-      <img src={logo} alt="The Wordle of Isaac" />
+      <img src={logo} alt="The Wordle of Isaac" className="logo-img" />
       <Routes>
         <Route path="/*" element={<Navigate replace to="/item" />} />
         <Route element={<ItemLayout />} path="/item" />

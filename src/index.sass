@@ -11,6 +11,8 @@ $border_regular: #565351
 
 html
   font-size: 32px
+  width: 100dvw
+  max-height: 100dvh
 
 
 ::selection
@@ -22,13 +24,14 @@ html
   margin: 0
   padding: 0
   image-rendering: pixelated
-  object-fit: cover
+  object-fit: cover  
 
 img
   user-select: none 
 
 ::-webkit-scrollbar
   width: 7px
+  height: 7px
 
 ::-webkit-scrollbar-thumb 
   background: $border_regular
@@ -38,17 +41,26 @@ img
 
 body, #root
   scrollbar-gutter: stable
-  height: 100vh
-  width: 100vw
+  height: 100dvh
+  max-height: 100dvh
+  width: 100dvw
   background: rgb(255,252,245)
   background: radial-gradient(circle, #fffcf5 0%, #b4b4b4 100%)
 
 
 .main-section
-  width: 70vw
+  width: 70dvw
   height: 100%
   margin: auto
 
   display: flex
   flex-direction: column
   align-items: center
+
+  gap: 10px
+
+  @media all and (max-width: 900px)
+    width: 100%
+
+  .logo-img
+    width: min(698px, 80dvw)

@@ -1,9 +1,9 @@
-import { type ReactElement } from 'react'
+import { type ReactElement, type ReactNode } from 'react'
 
 import './Hints.sass'
 
 type HintContainerProps = {
-  children: ReactElement
+  children: ReactNode
 }
 
 const HintContainer = ({ children }: HintContainerProps): ReactElement => {

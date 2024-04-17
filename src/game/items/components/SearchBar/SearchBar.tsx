@@ -46,7 +46,7 @@ const SearchBar = ({
   const handleBlur = (): void => {
     setSelectedItem(-1)
     console.log(selectedItem)
-    setIsMenuOpen(false)
+    setTimeout(() => setIsMenuOpen(false), 150)
   }
 
   const handleFocus = (): void => {
