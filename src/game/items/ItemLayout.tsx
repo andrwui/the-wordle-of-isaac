@@ -80,7 +80,15 @@ const ItemLayout = (): ReactElement => {
           </button>
         )}
       </div>
-      {quoteRevealed && <p>{currentItem?.quote}</p>}
+      {quoteRevealed && (
+        <p
+          style={{
+            textAlign: 'center',
+          }}
+        >
+          {currentItem?.quote}
+        </p>
+      )}
       {descRevealed && (
         <p
           style={{
