@@ -1,10 +1,12 @@
 import { type Dispatch, type SetStateAction, type ReactElement } from 'react'
 
 type SearchBarItemProps = {
+  index: number
   item: Item | Trinket
   selected: boolean
   setIsMenuOpen: Dispatch<SetStateAction<boolean>>
   setInputValue: Dispatch<SetStateAction<string>>
+  setSelectedItem: Dispatch<SetStateAction<number>>
   setFilteredItems: Dispatch<SetStateAction<Item[] | Trinket[]>>
   items: Item[] | Trinket[]
   setItems: (items: Item[] | Trinket[]) => void
@@ -15,6 +17,7 @@ type SearchBarItemProps = {
 }
 
 const SearchBarItem = ({
+  index,
   items,
   setItems,
   currentItem,
@@ -25,6 +28,7 @@ const SearchBarItem = ({
   setIsMenuOpen,
   setInputValue,
   setFilteredItems,
+  setSelectedItem,
 }: SearchBarItemProps): ReactElement => {
   const handleClick = (): void => {
     setItems(items.filter((a) => a.id !== item.id))
@@ -42,6 +46,7 @@ const SearchBarItem = ({
         backgroundColor: selected ? '#9b9b9b' : '',
       }}
       onClick={handleClick}
+      onMouseOver={() => setSelectedItem(index)}
     >
       {
         <img

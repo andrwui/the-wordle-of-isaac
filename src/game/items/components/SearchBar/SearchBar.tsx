@@ -55,18 +55,21 @@ const SearchBar = ({
 
   const handleKeydown = (e: KeyboardEvent<HTMLInputElement>): void => {
     const key = e.key
-    console.log('key: ', key)
+    console.log({ inputkey: key })
     if (key === 'Enter') {
-      const selecItem =
-        selectedItem > -1 ? filteredItems[selectedItem] : filteredItems[0]
-      setItems(items.filter((a) => a.id !== selecItem.id))
-      addGuess(selecItem)
-      setInputValue('')
-      setIsMenuOpen(false)
-      setSelectedItem(-1)
-      setFilteredItems([])
-      selecItem.id === currentItem?.id && setHasGuessed(true)
+      if (inputValue !== '') {
+        const selecItem =
+          selectedItem > -1 ? filteredItems[selectedItem] : filteredItems[0]
+        setItems(items.filter((a) => a.id !== selecItem.id))
+        addGuess(selecItem)
+        setInputValue('')
+        setIsMenuOpen(false)
+        setSelectedItem(-1)
+        setFilteredItems([])
+        selecItem.id === currentItem?.id && setHasGuessed(true)
+      }
     }
+
     if (key === 'Escape') {
       setInputValue('')
       setIsMenuOpen(false)
@@ -98,8 +101,9 @@ const SearchBar = ({
         className="search-bar__bar"
         disabled={hasGuessed}
       />
-      {isMenuOpen && (
+      {true && (
         <SearchBarList
+          setSelectedItem={setSelectedItem}
           setFilteredItems={setFilteredItems}
           addGuess={addGuess}
           currentItem={currentItem}
