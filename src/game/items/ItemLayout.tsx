@@ -63,7 +63,7 @@ const ItemLayout = (): ReactElement => {
           height: '320px',
         }}
       >
-        <h4>YOU WIN!!</h4>
+        <h2>YOU WIN!!</h2>
         <p>The item was: {currentItem?.name}</p>
         <button
           onClick={triggerReset}

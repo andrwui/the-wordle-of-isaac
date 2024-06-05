@@ -1,6 +1,5 @@
 import { type Dispatch, type SetStateAction, type ReactElement } from 'react'
 import SearchBarItem from './SearchBarItem'
-import { Virtuoso } from 'react-virtuoso'
 
 type SearchBarListProps = {
   possibleValues: Item[] | Trinket[]
@@ -44,7 +43,7 @@ const SearchBarList = ({
             setItems={setItems}
             addGuess={addGuess}
             currentItem={currentItem}
-            item={possibleValues[index]}
+            item={item}
             key={index}
             selected={index === selectedItem}
             setIsMenuOpen={setIsMenuOpen}
